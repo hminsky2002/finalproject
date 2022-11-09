@@ -10,5 +10,9 @@ const programSchema = new mongoose.Schema({
     //The host of the show, eg. "Sally Songsworth"
     host: String,
     //An object containing a start and end time for the show
-    timeSlot: Object
+    timeSlot: String
 });
+
+
+mongoose.model('Program', programSchema);
+mongoose.connect('mongodb://localhost/wnyu');
