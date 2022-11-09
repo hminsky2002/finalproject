@@ -15,4 +15,4 @@ const programSchema = new mongoose.Schema({
 
 
 mongoose.model('Program', programSchema);
-mongoose.connect('mongodb://localhost/wnyu');
+mongoose.connect('mongodb://127.0.0.1/wnyu');
