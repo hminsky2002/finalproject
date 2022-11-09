@@ -1,8 +1,8 @@
-import express from 'express'
-import path from 'path'
+import express from 'express';
+import path from 'path';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
-import './db.mjs'
+import './db.mjs';
 import session from 'express-session';
 
 const app = express();
