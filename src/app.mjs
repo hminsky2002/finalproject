@@ -24,9 +24,6 @@ app.get("/add-program",(req,res) =>{
         res.render("add-program");
 });
 
-app.get("/add-program",(req,res) =>{
-        res.render("add-program");
-});
 app.get("/add-tracks",(req,res) =>{
         res.render("add-tracks");
 });
