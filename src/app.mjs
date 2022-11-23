@@ -14,6 +14,7 @@ app.use(express.urlencoded({
 app.set('view engine','hbs');
 
 const Program = mongoose.model('Program');
+const Track = mongoose.model('Track');
 
 app.get("/",(req,res) =>{
         res.render("index");
@@ -21,6 +22,31 @@ app.get("/",(req,res) =>{
 
 app.get("/add-program",(req,res) =>{
         res.render("add-program");
+});
+
+app.get("/add-program",(req,res) =>{
+        res.render("add-program");
+});
+app.get("/add-tracks",(req,res) =>{
+        res.render("add-tracks");
+});
+app.post("/add-tracks",(req,res) =>{
+        const newTrack = new Track({
+                trackName: req.body.trackName,
+                //name of artist
+                artist: req.body.artist,
+                //track release date
+                releaseDate: req.body.releaseDate
+        })
+        newTrack.save((err, saved) => {
+                if (err) {
+                        console.log(err);
+
+                } else {
+                        console.log(saved);
+                        res.redirect('/');
+                }
+        });
 });
 
 app.post("/add-program",(req,res) =>{
@@ -57,3 +83,4 @@ app.get("/program-list",(req,res) =>{
 
 
 app.listen(process.env.PORT || 3000);
+

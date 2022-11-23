@@ -13,6 +13,15 @@ const programSchema = new mongoose.Schema({
     timeSlot: String
 });
 
+const trackSchema= new mongoose.Schema({
+    //the name of the track
+    trackName: String,
+    //name of artist
+    artist: String,
+    //track release date
+    releaseDate: String
+});
 
 mongoose.model('Program', programSchema);
+mongoose.model('Track', trackSchema);
 mongoose.connect('mongodb://localhost/wnyu');
