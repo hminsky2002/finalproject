@@ -24,4 +24,7 @@ const trackSchema= new mongoose.Schema({
 
 mongoose.model('Program', programSchema);
 mongoose.model('Track', trackSchema);
-mongoose.connect('mongodb://127.0.0.1/wnyu');
+
+export{
+
+}

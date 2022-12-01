@@ -1,60 +1,74 @@
 import mongoose from "mongoose";
 
-const Program = mongoose.model('Program');
+const Program = mongoose.model('Program')
 
 //get all programs
-const getPrograms = (req,res) =>{
-    Program.find({}).exec((err,programs)=>{
-        if(programs){
-            res.render('program-list',{programs:programs});
-        }
-        else{
-            res.render('program-list')
-        }
-    })
+const getPrograms = async (req,res) =>{
+    const programs = await Program.find({})
+    res.status(200).json(programs)
 }
 
 
 //get a single program
-const getProgram = (req,res) =>{
+const getProgram = async (req,res) =>{
     const {id} = req.params;
     if(!mongoose.Types.ObjectId.isValid(id)){
-        res.status(404);
+        return res.status(404).json({error: 'track does not exist'})
     }
-    else {
-        Program.findById(id).exec((err, program) => {
-            if (err) {
-                console.log(err)
-            } else {
-                res.render('program-list', program)
-            }
-        });
+    const program = await Program.findById(id);
+    if(!program){
+        return res.status(404).json({error:'track does not exist'})
+    }
+    res.status(200).json(program)
+}
+// create a new Program
+const createProgram = async (req, res) => {
+    const {programName, description, host, timeSlot} = req.body
+
+    // add to the database
+    try {
+        const program = await Program.create({ programName, description, host, timeSlot})
+        res.status(200).json(program)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
     }
 }
 
-//create new program
-const createProgram = (req,res) =>{
-    const {programName,description,host,timeSlot} = req.body;
-    const newProgram = new Program({
-        programName: programName,
-        //The description of the show, eg. "New indie and alternative music"
-        description: description,
-        //The host of the show, eg. "Sally Songsworth"
-        host: host,
-        //An object containing a start and end time for the show
-        timeSlot: timeSlot
+// delete a Program
+const deleteProgram = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({error: 'No such Program'})
+    }
+
+    const program= await Program.findOneAndDelete({_id: id})
+
+    if(!program) {
+        return res.status(400).json({error: 'No such Program'})
+    }
+
+    res.status(200).json(program)
+}
+
+// update a program
+const updateProgram = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({error: 'No such program'})
+    }
+
+    const program = await Program.findOneAndUpdate({_id: id}, {
+        ...req.body
     })
-    newProgram.save((err, saved) => {
-        if (err) {
-            console.log(err);
 
-        } else {
-            console.log(saved);
-            res.redirect('/');
-        }
-    });
+    if (!program) {
+        return res.status(400).json({error: 'No such program'})
+    }
+
+    res.status(200).json(program)
 }
-
 
 
 //update a program
@@ -63,7 +77,9 @@ const createProgram = (req,res) =>{
 export{
     createProgram,
     getPrograms,
-    getProgram
+    getProgram,
+    deleteProgram,
+    updateProgram
 }
 
 
