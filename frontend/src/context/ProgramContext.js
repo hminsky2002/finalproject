@@ -10,7 +10,7 @@ export const programReducer = (state, action) =>{
             }
         case 'CREATE_PROGRAM':
             return{
-                workouts: [action.payload, ...state.program]
+                programs: [action.payload, ...state.programs]
             }
         default:
             return state
