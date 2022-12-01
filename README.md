@@ -8,10 +8,10 @@ The content below is an example project proposal / requirements document. Replac
 
 WNYU is NYU's student radio station that serves music, news and podcasts all hours of the day on net and 89.1FM!
 However te current website is fairly outdated and only getting more deprecated. The goal of this project is not
-to fully develop a replacement web app for WNYU but to implement a light-weight model of what the new website 
+to fully develop a replacement web server for WNYU but to implement a light-weight model of what the new website 
 could look like in the future. 
 
-The intention is to make a web app that can 
+The intention is to make a web server that can 
 
 1. Display the currently playing program
 2. Allow users to search through the list of programs on the station
@@ -38,7 +38,7 @@ An Example Program:
 
 
 
-## [Link to Commented First Draft Schema](src/db.mjs) 
+## [Link to Commented First Draft Schema](backend/db.mjs) 
 
 ## Wireframes
 
@@ -90,7 +90,7 @@ An Example Program:
 9 points total out of 8 required points
 
 
-## [Link to Initial Main Project File](src/app.mjs) 
+## [Link to Initial Main Project File](backend/server.mjs) 
 
 ## Annotations / References Used
 
