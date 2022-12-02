@@ -12,6 +12,10 @@ export const programReducer = (state, action) =>{
             return{
                 programs: [action.payload, ...state.programs]
             }
+        case 'DELETE_PROGRAM':
+            return{
+                programs: state.programs.filter((p)=> p._id !==action.payload._id)
+            }
         default:
             return state
     }

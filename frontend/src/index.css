@@ -13,8 +13,12 @@ body {
   margin: 0;
   font-family: "Poppins";
 }
+
+h2{
+  color: white;
+}
 header {
-  background: #fff;
+  background: #171515;
 }
 header .container {
   max-width: 1400px;
@@ -22,8 +26,10 @@ header .container {
   padding: 10px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
+
+
 
 header a {
   color: #333;
@@ -31,9 +37,20 @@ header a {
 }
 
 .container img {
-  width: 25%;
+  width: 100%;
   height: auto;
   max-width: 200px;
+  display: block;
+  margin: auto;
+}
+
+.container h2:hover{
+  -webkit-transition: color 0.5s;
+  -moz-transition:    color 0.5s;
+  -ms-transition:     color 0.5s;
+  -o-transition:      color 0.5s;
+  transition:         color 0.5s;
+  color: red;
 }
 .pages{
   max-width: 1400px;
@@ -104,4 +121,7 @@ div.error {
   color: var(--error);
   border-radius: 4px;
   margin: 20px 0;
+}
+input.error{
+  border: 1px solid var(--error);
 }

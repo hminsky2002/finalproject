@@ -24,7 +24,23 @@ const getProgram = async (req,res) =>{
 // create a new Program
 const createProgram = async (req, res) => {
     const {programName, description, host, timeSlot} = req.body
+    let emptyFields = []
 
+    if(!programName){
+        emptyFields.push('programName')
+    }
+    if(!description) {
+        emptyFields.push('description')
+    }
+    if(!host) {
+        emptyFields.push('host')
+    }
+    if(!timeSlot) {
+        emptyFields.push('timeSlot')
+    }
+    if(emptyFields.length > 0){
+        return res.status(400).json({error: "Please fill in all the fields",emptyFields})
+    }
     // add to the database
     try {
         const program = await Program.create({ programName, description, host, timeSlot})

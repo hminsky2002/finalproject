@@ -9,7 +9,7 @@ const AddProgram = () =>{
     const [host,setHost] = useState('')
     const [timeSlot,setTime] = useState('')
     const [error,setError] = useState(null)
-
+    const [emptyFields,setEmptyFields] = useState([])
     const handleSubmit = async (evt) => {
         evt.preventDefault();
 
@@ -24,6 +24,7 @@ const AddProgram = () =>{
         const json = await response.json()
         if(!response.ok){
             setError(json.error);
+            setEmptyFields(json.emptyFields)
         }
         if(response.ok){
             setName('');
@@ -31,6 +32,7 @@ const AddProgram = () =>{
             setHost('');
             setTime('');
             setError(null);
+            setEmptyFields([])
             console.log("New Program Added");
             dispatch({type:'CREATE_PROGRAM',payload:json})
         }
@@ -46,24 +48,30 @@ const AddProgram = () =>{
                 type="text"
                 onChange={(p)=>setName(p.target.value)}
                 value={programName}
+                className={emptyFields.includes('programName') ? 'error' : ''}
                 />
             <label>Program Description</label>
             <input
                 type="text"
                 onChange={(d)=>setDescription(d.target.value)}
                 value={description}
+                className={emptyFields.includes('description') ? 'error' : ''}
             />
             <label>Program Host</label>
             <input
                 type="text"
                 onChange={(h)=>setHost(h.target.value)}
                 value={host}
+                className={emptyFields.includes('host') ? 'error' : ''}
+
             />
             <label>Program Time Slot</label>
             <input
                 type="text"
                 onChange={(t)=>setTime(t.target.value)}
                 value={timeSlot}
+                className={emptyFields.includes('timeSlot') ? 'error' : ''}
+
             />
             <button>add program</button>
             {error && <div className="error">{error}</div>}

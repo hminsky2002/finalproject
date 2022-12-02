@@ -2,8 +2,10 @@ import {BrowserRouter,Routes,Route} from "react-router-dom";
 import React, { Component }  from 'react';
 
 //pages and components
-import Home from "./pages/home";
+import ProgramList from "./pages/program-list";
 import Navbar from "./components/navbar";
+import Register from "./pages/register";
+import Login from "./pages/login";
 
 function App() {
   return (
@@ -13,8 +15,14 @@ function App() {
         <div className="pages">
           <Routes>
             <Route path="/"
-                   element={<Home/>}
+                   element={<ProgramList/>}
                    />
+              <Route path="/login"
+                     element={<Login/>}
+              />
+              <Route path="/register"
+                     element={<Register/>}
+                     />
           </Routes>
         </div>
       </BrowserRouter>

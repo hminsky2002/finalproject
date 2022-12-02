@@ -5,7 +5,7 @@ import AddProgram from '../components/add-Program';
 import {useProgramContext} from "../hooks/useProgramsContext";
 
 
-const Home = () => {
+const ProgramList = () => {
     const {programs,dispatch} = useProgramContext();
     useEffect(() => {
         const fetchPrograms = async () => {
@@ -30,4 +30,4 @@ const Home = () => {
     )
 };
 
-export default Home
+export default ProgramList

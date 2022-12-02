@@ -8,8 +8,11 @@ import {
      getPrograms,
      updateProgram
 } from "../controllers/programController.mjs";
+import {requireAuth} from "../middleware/requireAuth.mjs";
 const programRoutes = express.Router();
 
+//require authorization for all program routes
+programRoutes.use(requireAuth)
 
 //get all programs
 programRoutes.get('/', getPrograms);
