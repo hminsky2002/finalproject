@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
 const Host = mongoose.model('Host')
 
 const createToken = (_id) =>{

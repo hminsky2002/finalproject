@@ -1,27 +1,30 @@
-import {BrowserRouter,Routes,Route} from "react-router-dom";
-import React, { Component }  from 'react';
+import {BrowserRouter,Routes,Route,Navigate} from "react-router-dom";
+import React  from 'react';
+import {useAuthContext} from "./hooks/useAuthContext";
 
 //pages and components
-import ProgramList from "./pages/program-list";
+import ProgramList from "./pages/ProgramList";
 import Navbar from "./components/navbar";
-import Register from "./pages/register";
-import Login from "./pages/login";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 function App() {
-  return (
+    const {host} = useAuthContext()
+
+    return (
     <div className="App">
       <BrowserRouter>
           <Navbar/>
         <div className="pages">
           <Routes>
             <Route path="/"
-                   element={<ProgramList/>}
+                   element={host ? <ProgramList/> : <Login/>}
                    />
               <Route path="/login"
-                     element={<Login/>}
+                     element={!host ? <Login/> : <Navigate to="/"/>}
               />
               <Route path="/register"
-                     element={<Register/>}
+                     element={!host ? <Register/> : <Navigate to="/"/>}
                      />
           </Routes>
         </div>

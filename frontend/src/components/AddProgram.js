@@ -1,43 +1,50 @@
 import React, {useState} from "react";
 import {useProgramContext} from "../hooks/useProgramsContext";
+import {useAuthContext} from "../hooks/useAuthContext";
 
 const AddProgram = () =>{
     const {dispatch} = useProgramContext()
+    const {host} = useAuthContext()
 
     const [programName,setName] = useState('')
     const [description,setDescription] = useState('')
-    const [host,setHost] = useState('')
+    const [dj,setDj] = useState('')
     const [timeSlot,setTime] = useState('')
+
     const [error,setError] = useState(null)
-    const [emptyFields,setEmptyFields] = useState([])
+    const [emptyFields,setEmptyFields] = useState([]);
+
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-
-        const program = {programName,description,host,timeSlot}
+        if(!host){
+            setError('Only hosts may add programs, you devil!')
+            return
+        }
+        const program = {programName,description,dj,timeSlot}
         const response = await fetch('/api/programs',{
             method:'POST',
             body:JSON.stringify(program),
             headers:{
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${host.token}`
             }
         })
         const json = await response.json()
         if(!response.ok){
             setError(json.error);
             setEmptyFields(json.emptyFields)
+            console.log(emptyFields)
         }
         if(response.ok){
             setName('');
             setDescription('');
-            setHost('');
+            setDj('');
             setTime('');
             setError(null);
-            setEmptyFields([])
+            setEmptyFields([]);
             console.log("New Program Added");
             dispatch({type:'CREATE_PROGRAM',payload:json})
         }
-
-
 
     }
     return (
@@ -57,12 +64,12 @@ const AddProgram = () =>{
                 value={description}
                 className={emptyFields.includes('description') ? 'error' : ''}
             />
-            <label>Program Host</label>
+            <label>Program DJ</label>
             <input
                 type="text"
-                onChange={(h)=>setHost(h.target.value)}
-                value={host}
-                className={emptyFields.includes('host') ? 'error' : ''}
+                onChange={(h)=>setDj(h.target.value)}
+                value={dj}
+                className={emptyFields.includes('dj') ? 'error' : ''}
 
             />
             <label>Program Time Slot</label>

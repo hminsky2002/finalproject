@@ -11,8 +11,8 @@ import {
 import {requireAuth} from "../middleware/requireAuth.mjs";
 const programRoutes = express.Router();
 
-//require authorization for all program routes
-programRoutes.use(requireAuth)
+//require authorization for all program modifying routes
+// programRoutes.use(requireAuth);
 
 //get all programs
 programRoutes.get('/', getPrograms);

@@ -9,7 +9,7 @@ const programSchema = new mongoose.Schema({
     //The description of the show, eg. "New indie and alternative music"
     description: {type:String,required:true},
     //The host of the show, eg. "Sally Songsworth"
-    host: {type:String,required:true},
+    dj: {type:String,required:true},
     //An object containing a start and end time for the show
     timeSlot: {type:String,required:true}
 });

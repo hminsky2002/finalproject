@@ -23,7 +23,7 @@ export const useRegister = () => {
         }
         if(response.ok){
             //save the user to local storage
-            localStorage.setItem('user',JSON.stringify(json))
+            localStorage.setItem('host',JSON.stringify(json))
 
             dispatch({type: 'LOGIN',payload:json})
 

@@ -1,23 +1,30 @@
-import React, { Component }  from 'react';
+import React  from 'react';
 import {useEffect} from "react";
-import ProgramDetails from '../components/programfield';
-import AddProgram from '../components/add-Program';
+import ProgramDetails from '../components/ProgramDetails';
+import AddProgram from '../components/AddProgram';
 import {useProgramContext} from "../hooks/useProgramsContext";
-
+import {useAuthContext} from "../hooks/useAuthContext";
 
 const ProgramList = () => {
     const {programs,dispatch} = useProgramContext();
+    const {host} = useAuthContext();
     useEffect(() => {
         const fetchPrograms = async () => {
-            const response = await fetch('/api/programs')
+            const response = await fetch('/api/programs',{
+                headers:{
+                    'Authorization': `Bearer ${host.token}`
+                }
+            })
             const json = await response.json()
 
             if(response.ok){
                 dispatch({type: 'SET_PROGRAMS',payload:json})
             }
         }
-        fetchPrograms()
-    },[dispatch])
+        if(host){
+            fetchPrograms()
+        }
+    },[dispatch,host])
     return(
         <div className="Home">
             <div className="programs">

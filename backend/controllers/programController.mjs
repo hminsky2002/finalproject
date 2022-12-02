@@ -23,7 +23,7 @@ const getProgram = async (req,res) =>{
 }
 // create a new Program
 const createProgram = async (req, res) => {
-    const {programName, description, host, timeSlot} = req.body
+    const {programName, description, dj, timeSlot} = req.body
     let emptyFields = []
 
     if(!programName){
@@ -32,8 +32,8 @@ const createProgram = async (req, res) => {
     if(!description) {
         emptyFields.push('description')
     }
-    if(!host) {
-        emptyFields.push('host')
+    if(!dj) {
+        emptyFields.push('dj')
     }
     if(!timeSlot) {
         emptyFields.push('timeSlot')
@@ -43,7 +43,7 @@ const createProgram = async (req, res) => {
     }
     // add to the database
     try {
-        const program = await Program.create({ programName, description, host, timeSlot})
+        const program = await Program.create({ programName, description, dj, timeSlot})
         res.status(200).json(program)
     } catch (error) {
         res.status(400).json({ error: error.message })

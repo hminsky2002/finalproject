@@ -1,6 +1,6 @@
 
 import React, { useState } from "react"
-import login from "./login";
+import login from "./Login";
 import {useRegister} from "../hooks/useRegister";
 
 const Register = () => {
@@ -21,13 +21,13 @@ const Register = () => {
             <h3>Sign Up</h3>
             <label>First Name:</label>
             <input
-                type="firstName"
+                type="text"
                 onChange={(e) => setFirstName(e.target.value)}
                 value={firstName}
             />
             <label>Last Name:</label>
             <input
-                type="lastName"
+                type="text"
                 onChange={(e) => setLastName(e.target.value)}
                 value={lastName}
             />

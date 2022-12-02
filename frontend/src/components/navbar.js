@@ -12,7 +12,6 @@ const Navbar = () =>{
         logout()
     }
 
-
     return(
         <header>
             <div className="container">
@@ -21,9 +20,11 @@ const Navbar = () =>{
                     <span>{host.email}</span>
                 </div>
                     )}
+                {host && (
                 <div>
                     <button onClick={handleClick}>Log out</button>
                 </div>
+                    )}
                 <Link to="/schedule">
                     <h2>Schedule</h2>
                 </Link>
