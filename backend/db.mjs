@@ -10,8 +10,34 @@ const programSchema = new mongoose.Schema({
     description: {type:String,required:true},
     //The host of the show, eg. "Sally Songsworth"
     dj: {type:String,required:true},
-    //An object containing a start and end time for the show
-    timeSlot: {type:String,required:true}
+    //An object containing the day of week the show runs
+    day: {
+        id: {type:Number,
+        required:true,
+        min: 1,
+        max: 7},
+        value: {
+            type:String,
+            required:true,
+
+        }
+    },
+    //start time of program
+    startTime: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 24,
+        unique: true,
+    },
+    //end time of program
+    endTime: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 24,
+        unique: true,
+    }
 });
 
 const trackSchema= new mongoose.Schema({
@@ -20,7 +46,7 @@ const trackSchema= new mongoose.Schema({
     //name of artist
     artist: {type:String,required:true},
     //track release date
-    releaseDate: {type:String,required:true}
+    releaseDate: {type:Date,required:true}
 });
 
 //schema for a host/user of the admin portion of the page
@@ -30,6 +56,13 @@ const hostSchema = new mongoose.Schema({
     email: {type:String,required:true,unique:true},
     password: {type:String,required:true}
 
+})
+
+//schema for a past episode of a show
+const episodeSchema = new mongoose.Schema({
+    program: {type: mongoose.Schema.Types.ObjectId, ref: 'Program' },
+    host: {type: mongoose.Schema.Types.ObjectId, ref:'Host' },
+    date: {type:Date}
 })
 
 hostSchema.statics.register = async function (firstName, lastName, email,password){

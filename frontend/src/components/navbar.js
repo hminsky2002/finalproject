@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import ReactAudioPlayer from "react-audio-player";
 import {useLogout} from "../hooks/useLogout";
 import {useAuthContext} from "../hooks/useAuthContext";
 
@@ -16,8 +15,8 @@ const Navbar = () =>{
         <header>
             <div className="container">
                 {host && (
-                <div>
-                    <span>{host.email}</span>
+                <div className="userLogin">
+                    <span><p>Logged in as: {host.email}</p></span>
                 </div>
                     )}
                 {host && (
@@ -41,6 +40,11 @@ const Navbar = () =>{
                 <Link to="/login">
                     <h2>Login</h2>
                 </Link>
+                    )}
+                {host &&(
+                    <Link to="/addNewProgram">
+                        <h2>Add Program</h2>
+                    </Link>
                     )}
 
             </div>

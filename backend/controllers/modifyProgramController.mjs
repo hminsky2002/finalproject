@@ -2,28 +2,9 @@ import mongoose from "mongoose";
 
 const Program = mongoose.model('Program')
 
-//get all programs
-const getPrograms = async (req,res) =>{
-    const programs = await Program.find({})
-    res.status(200).json(programs)
-}
-
-
-//get a single program
-const getProgram = async (req,res) =>{
-    const {id} = req.params;
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'track does not exist'})
-    }
-    const program = await Program.findById(id);
-    if(!program){
-        return res.status(404).json({error:'track does not exist'})
-    }
-    res.status(200).json(program)
-}
 // create a new Program
 const createProgram = async (req, res) => {
-    const {programName, description, dj, timeSlot} = req.body
+    const {programName, description, dj, day,startTime,endTime} = req.body
     let emptyFields = []
 
     if(!programName){
@@ -35,15 +16,22 @@ const createProgram = async (req, res) => {
     if(!dj) {
         emptyFields.push('dj')
     }
-    if(!timeSlot) {
-        emptyFields.push('timeSlot')
+    if(!day) {
+        emptyFields.push('day')
     }
+    if(!startTime){
+        emptyFields.push('startTime')
+    }
+    if(!endTime){
+        emptyFields.push('endTime')
+    }
+
     if(emptyFields.length > 0){
         return res.status(400).json({error: "Please fill in all the fields",emptyFields})
     }
     // add to the database
     try {
-        const program = await Program.create({ programName, description, dj, timeSlot})
+        const program = await Program.create({ programName, description, dj, day, startTime,endTime})
         res.status(200).json(program)
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -92,8 +80,6 @@ const updateProgram = async (req, res) => {
 
 export{
     createProgram,
-    getPrograms,
-    getProgram,
     deleteProgram,
     updateProgram
 }

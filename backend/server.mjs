@@ -4,8 +4,9 @@ dotenv.config()
 import express from 'express';
 import mongoose from 'mongoose';
 import './db.mjs';
-import {programRoutes} from "./routes/programs.mjs";
+import {modifyProgramRoutes} from "./routes/modifyPrograms.mjs";
 import {hostRouter} from "./routes/hosts.mjs";
+import {getProgramRoutes} from "./routes/getPrograms.mjs";
 
 const server = express();
 
@@ -14,8 +15,11 @@ server.use(express.json());
 
 
 //routes
-server.use('/api/programs',programRoutes);
 server.use('/api/hosts',hostRouter);
+server.use('/api/modifyPrograms',modifyProgramRoutes);
+server.use('/api/getPrograms',getProgramRoutes);
+
+
 
 
 mongoose.connect('mongodb://localhost/wnyu').then(() => {

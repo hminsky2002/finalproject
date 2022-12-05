@@ -11,7 +11,7 @@ const ProgramDetails = ({program}) =>{
         if(!host){
             return
         }
-        const response = await fetch('/api/programs/' + program._id,{
+        const response = await fetch('/api/modifyPrograms/' + program._id,{
             method: 'DELETE',
             headers:{
                 'Authorization': `Bearer ${host.token}`
@@ -27,7 +27,9 @@ const ProgramDetails = ({program}) =>{
             <h4>{program.programName}</h4>
             <p><strong>Program Description: </strong>{program.description}</p>
             <p><strong>Program DJ: </strong>{program.dj}</p>
-            <p><strong>Program TimeSlot: </strong>{program.timeSlot}</p>
+            <p><strong>Program Day: </strong>{program.day.value}</p>
+            <p><strong>Program Start Time: </strong>{program.startTime}</p>
+            <p><strong>Program End Time: </strong>{program.endTime}</p>
             <span onClick={handleClick}>delete</span>
         </div>
     )

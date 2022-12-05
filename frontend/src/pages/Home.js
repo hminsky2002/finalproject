@@ -5,25 +5,19 @@ import AddProgram from '../components/AddProgram';
 import {useProgramContext} from "../hooks/useProgramsContext";
 import {useAuthContext} from "../hooks/useAuthContext";
 
-const ProgramList = () => {
+const Home = () => {
     const {programs,dispatch} = useProgramContext();
     const {host} = useAuthContext();
     useEffect(() => {
         const fetchPrograms = async () => {
-            const response = await fetch('/api/programs',{
-                headers:{
-                    'Authorization': `Bearer ${host.token}`
-                }
-            })
+            const response = await fetch('/api/getPrograms')
             const json = await response.json()
 
             if(response.ok){
                 dispatch({type: 'SET_PROGRAMS',payload:json})
             }
         }
-        if(host){
-            fetchPrograms()
-        }
+        fetchPrograms()
     },[dispatch,host])
     return(
         <div className="Home">
@@ -32,9 +26,8 @@ const ProgramList = () => {
                     <ProgramDetails key={program._id} program={program}/>
                 ))}
             </div>
-            <AddProgram/>
         </div>
     )
 };
 
-export default ProgramList
+export default Home

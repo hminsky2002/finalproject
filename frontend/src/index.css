@@ -125,3 +125,16 @@ div.error {
 input.error{
   border: 1px solid var(--error);
 }
+
+.player-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-container h2{
+  color: red;
+}
+.userLogin{
+  color:white;
+}

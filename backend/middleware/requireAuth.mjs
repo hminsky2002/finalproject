@@ -13,8 +13,8 @@ const requireAuth = async (req,res,next) => {
 
     try {
         const {_id} = jwt.verify(token, process.env.SECRET)
-
-        req.host = await Host.findOne({_id}).select('_id')
+        console.log(_id)
+        req.body.host = await Host.findOne({_id}).select('_id')
         next()
     } catch(error){
         console.log(error)
