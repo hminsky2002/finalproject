@@ -30,8 +30,8 @@
     ]
   },
   "proxy":{
-    "/api":{
-        "target":"http://localhost:4000"
+    "/api": {
+      "target":"http://localhost:4000"
     }
   },
   "browserslist": {
