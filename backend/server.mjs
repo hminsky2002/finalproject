@@ -32,5 +32,4 @@ mongoose.connect(`mongodb://${process.env.MONGO}/wnyu`).then(() => {
     .catch((err) => {
         console.log(err)
     })
-server.listen(process.env.PORT || 4000);
 
