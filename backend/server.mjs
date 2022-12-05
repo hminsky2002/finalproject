@@ -22,7 +22,7 @@ server.use('/api/getPrograms',getProgramRoutes);
 
 
 
-mongoose.connect(`mongodb:/${process.env.PORT}/wnyu`).then(() => {
+mongoose.connect(`mongodb://${process.env.PORT}/wnyu`).then(() => {
     console.log('mongoose connected!')
     // listen to port
     server.listen(process.env.PORT, () => {
