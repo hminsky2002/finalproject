@@ -18,12 +18,12 @@ const __dirname = path.dirname(__filename);
 
 
 
-
 const server = express();
 
 //middleware
 server.use(express.json());
 server.use(cors())
+
 
 //routes
 server.use('/api/hosts',hostRouter);
