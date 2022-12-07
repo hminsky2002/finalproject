@@ -22,7 +22,7 @@ const server = express();
 
 //middleware
 server.use(express.json());
-server.use(cors())
+server.use(express.static(path.join(__dirname, '..','frontend', 'build')))
 
 
 //routes
@@ -30,6 +30,9 @@ server.use('/api/hosts',hostRouter);
 server.use('/api/modifyPrograms',modifyProgramRoutes);
 server.use('/api/getPrograms',getProgramRoutes);
 
+server.get('*',async(req,res)=>{
+    res.sendFile(path.join(__dirname, '..','frontend', 'build'))
+})
 
 
 mongoose.connect(`mongodb://${process.env.MONGO}/wnyu`).then(() => {

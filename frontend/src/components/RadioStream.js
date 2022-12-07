@@ -40,7 +40,6 @@ const RadioStream = () =>{
             <div>
                 <p> Time : {date.toLocaleTimeString()}</p>
                 <p> Date : {date.toLocaleDateString()}</p>
-                <p> playing: </p>
             </div>
         </div>
     )
